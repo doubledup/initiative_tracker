@@ -1,0 +1,16 @@
+{
+  "name": "initiative_tracker",
+  "version": "1.0.0",
+  "description": "Web-based initiative tracker for Pathfinder & D&D",
+  "main": "",
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "doubledup",
+  "license": "ISC",
+  "dependencies": {
+    "elm": "^0.19.0-bugfix2",
+    "http-server": "^0.11.1"
+  }
+}
