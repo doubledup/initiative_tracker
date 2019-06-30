@@ -154,24 +154,36 @@ view model =
                 []
             ]
         , button [ onClick AddCharacter ] [ text "Add" ]
-        , div []
-            [ text "Next character: "
-            , p []
-                [ div [] [ text <| "Name: " ++ model.nextCharacter.name ++ " " ]
-                , div [] [ text <| "Initiative: " ++ String.fromInt model.nextCharacter.initiativeMod ]
-                ]
-            ]
+        , viewNextCharacter model.nextCharacter
         , h2 [] [ text "Characters" ]
         , ul [] <|
-            List.map (\c -> li [] [ text <| showCharacterInitiative c ])
+            List.map viewCharacterInitiative
                 (List.sortBy (\c -> -c.initiative) <| Array.toList model.characters)
         , button [ onClick RollInitiative ] [ text "Roll Initiative!" ]
         ]
 
 
-showCharacterInitiative : Character -> String
-showCharacterInitiative c =
-    c.name ++ "|" ++ String.fromInt c.initiative ++ "|" ++ String.fromInt c.initiativeMod
+viewNextCharacter : Character -> Html Msg
+viewNextCharacter c =
+    div []
+        [ text "Next character: "
+        , p []
+            [ div [] [ text <| "Name: " ++ c.name ++ " " ]
+            , div [] [ text <| "Initiative: " ++ String.fromInt c.initiativeMod ]
+            ]
+        ]
+
+
+viewCharacterInitiative : Character -> Html Msg
+viewCharacterInitiative c =
+    li []
+        [ text <|
+            c.name
+                ++ "|"
+                ++ String.fromInt c.initiative
+                ++ "|"
+                ++ String.fromInt c.initiativeMod
+        ]
 
 
 handleInitiative charName initiative =
