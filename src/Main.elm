@@ -143,6 +143,7 @@ view model =
             , input
                 [ onInput
                     (\name -> UpdateNextCharacter name model.nextCharacter.initiativeMod)
+                , value model.nextCharacter.name
                 ]
                 []
             ]
@@ -150,6 +151,7 @@ view model =
             [ text "Initiative "
             , input
                 [ onInput <| handleInitiative model.nextCharacter.name
+                , value <| String.fromInt model.nextCharacter.initiativeMod
                 ]
                 []
             ]
