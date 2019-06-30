@@ -149,15 +149,7 @@ view model =
         , div []
             [ text "Initiative "
             , input
-                [ onInput
-                    (\initiative ->
-                        case String.toInt initiative of
-                            Just i ->
-                                UpdateNextCharacter model.nextCharacter.name i
-
-                            Nothing ->
-                                UpdateNextCharacter model.nextCharacter.name 0
-                    )
+                [ onInput <| handleInitiative model.nextCharacter.name
                 ]
                 []
             ]
@@ -180,3 +172,12 @@ view model =
 showCharacterInitiative : Character -> String
 showCharacterInitiative c =
     c.name ++ "|" ++ String.fromInt c.initiative ++ "|" ++ String.fromInt c.initiativeMod
+
+
+handleInitiative charName initiative =
+    case String.toInt initiative of
+        Just i ->
+            UpdateNextCharacter charName i
+
+        Nothing ->
+            UpdateNextCharacter charName 0
