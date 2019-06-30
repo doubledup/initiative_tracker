@@ -60,6 +60,7 @@ type Msg
     | AddCharacter
     | RollInitiative
     | SetInitiative Int Int
+    | RemoveCharacter String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -112,6 +113,9 @@ update msg model =
 
                 Nothing ->
                     ( model, Cmd.none )
+
+        RemoveCharacter name ->
+            ( { model | characters = Array.filter (\c -> c.name /= name) model.characters }, Cmd.none )
 
 
 rollInitiative i m =
@@ -185,6 +189,7 @@ viewCharacterInitiative c =
                 ++ String.fromInt c.initiative
                 ++ "|"
                 ++ String.fromInt c.initiativeMod
+        , button [ onClick <| RemoveCharacter c.name ] [ text "Remove" ]
         ]
 
 
