@@ -160,23 +160,11 @@ view model =
                 []
             ]
         , button [ onClick AddCharacter ] [ text "Add" ]
-        , viewNextCharacter model.nextCharacter
         , h2 [] [ text "Characters" ]
         , ul [] <|
             List.map viewCharacterInitiative
                 (List.sortBy (\c -> -c.initiative) <| Array.toList model.characters)
         , button [ onClick RollInitiative ] [ text "Roll Initiative!" ]
-        ]
-
-
-viewNextCharacter : Character -> Html Msg
-viewNextCharacter c =
-    div []
-        [ text "Next character: "
-        , p []
-            [ div [] [ text <| "Name: " ++ c.name ++ " " ]
-            , div [] [ text <| "Initiative: " ++ String.fromInt c.initiativeMod ]
-            ]
         ]
 
 
